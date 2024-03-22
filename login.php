@@ -1,9 +1,82 @@
+
+<?php
+
+// Start the session
+session_start();
+
+if(isset($_SESSION['username'])){
+// Unset specific session variables (e.g., username and role)
+unset($_SESSION['username']);
+
+// Destroy the session (optional, depending on your needs)
+session_destroy();
+
+// Redirect to the index page or any other page after logout
+echo "<script>
+alert('You have successfully logged out');
+window.location.reload();
+</script>";
+}
+?>
+
+<?php
+
+include('config.php');
+
+$conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
+if($conn ->connect_error){
+    die("Connection Failed: " . $conn->connect_error);
+}
+
+//Get Inputs from form
+if($_SERVER['REQUEST_METHOD']=='POST'){
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    //check if user exists
+    $sql = "SELECT * FROM artist WHERE username = '$username'";
+    $result = mysqli_query($conn, $sql);
+
+    if($result){
+        $num = mysqli_num_rows($result);
+
+        if($num == 1){
+            $row = mysqli_fetch_assoc($result);
+            $hashed_password = $row['password'];
+
+            if(password_verify($password, $hashed_password)){
+                session_start();
+                $_SESSION['username'] = $username;
+                header('Location: artist_dash.php');
+            }else{
+                echo "<script>
+                alert('Wrong Password');
+                window.location.href = 'login.php';
+                </script>";
+            }
+        }else{
+                echo '<script>
+                alert("Invalid username");
+                window.location.href = "login.php";
+                </script>';
+            }
+
+    }else{
+        echo "<script>
+        alert('Connection Failed');
+        window.location.href = 'login.php';
+        </script>";
+    }
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
 
     <!-- Bootstrap CDN -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
@@ -20,7 +93,10 @@
     <!-- Custom StyleSheet -->
     <link rel="stylesheet" href="./css/login.css" />
     <title>SM Art Gallery</title>
-    <link rel="icon" type="image/x-icon" href="/images/favicon.jpeg">
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+<link rel="manifest" href="./site.webmanifest">
 
 
 </head>
@@ -66,7 +142,7 @@
 
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand d-flex align-items-center" href="">
-    <img src="/images/favicon.jpeg" alt="Logo" width="40" height="40" class="mr-2"> <!-- Adjust width, height, and path accordingly -->
+    <img src="./images/favicon.jpeg" alt="Logo" width="40" height="40" class="mr-2"> <!-- Adjust width, height, and path accordingly -->
           <h1 class="mr-lg-5 mb-0">SM Art Gallery  &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;   </h1> 
         </a>
 
@@ -78,7 +154,7 @@
         
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="/" >Home  &nbsp;<span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/smart" >Home  &nbsp;<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
               <a class="nav-link" href="#about" >About &nbsp; </a>
@@ -129,7 +205,7 @@
         <div class="col-md-6">
           <div class="login-form">
             <h2>Artist Login</h2>
-            <form action="/login.php" method="POST">
+            <form action="/smart/login.php" method="POST">
               <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <style>
+    input[type="text"],
+    select {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+      width: 100%;
+      background-color: #f0961c;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    div {
+      border-radius: 5px;
+      background-color: #f2f2f2;
+      padding: 20px;
+    }
+  </style>
+  <body>
+    <h2>SM Art Gallery</h2>
+    <p></p>
+
+    <div style="text-align: center">
+      <img
+        src="/images/sample.png"
+        alt="Paris"
+        style="width: 120px; height: 120px"
+      />
+      <p>Secure Payment</p>
+    </div>
+
+    <br />
+    <h3>Please fill following details after successful payment</h3>
+
+    <div>
+      <form method="POST" name="google-sheet">
+        <label for="fname">Name</label>
+        <input type="text" id="fname" name="Name" placeholder="Your name.." />
+
+        <label for="lname">Mobile</label>
+        <input
+          type="text"
+          id="lname"
+          name="Mobile"
+          placeholder="Your mobile.."
+        />
+
+        <label for="lname">Shipping Address</label>
+        <input
+          type="text"
+          id="lname"
+          name="Address"
+          placeholder="Your email.."
+        />
+
+        <input type="submit" value="Submit" name="submit" />
+      </form>
+    </div>
+
+    <script>
+      const scriptURL =
+        "https://script.google.com/macros/s/AKfycbyqfKT7U8cvItHO1MXcdqIOyf-U_FJ4WPoBC6GbXxdqKRx5aBYeTpzVmybIJOE69KBE/exec";
+      const form = document.forms["google-sheet"];
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        fetch(scriptURL, { method: "POST", body: new FormData(form) })
+          .then((response) => alert("your successfully stored..!!"))
+          .catch((error) => console.error("Error!", error.message));
+      });
+    </script>
+  </body>
+</html>

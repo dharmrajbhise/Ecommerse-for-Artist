@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delete and Upload Image</title>
+  </head>
+  <body>
+    <div class="product-center container">
+      <div class="product-item">
+        <div class="overlay">
+          <a href="productDetails.html" class="product-thumb">
+            <img
+              src="../images/Paintings/realistic_images/realistic_1.jpeg"
+              id="zoom"
+              alt=""
+            />
+          </a>
+          <span class="discount">40%</span>
+        </div>
+        <div class="product-info">
+          <span>SM Art</span>
+          <a href="productDetails.html">#</a>
+          <h4>Rs 15,000/-</h4>
+        </div>
+      </div>
+    </div>
+
+    <input type="file" id="imageUpload" accept="image/*" />
+    <button onclick="deleteAndUploadImage()">Save Changes</button>
+
+    <script>
+      // Function to handle deleting the existing image and uploading a new one
+      function deleteAndUploadImage() {
+        // Implement your password mechanism here to authenticate the action
+
+        var fileInput = document.getElementById("imageUpload");
+        var file = fileInput.files[0]; // Assuming only one file is selected
+
+        if (file) {
+          var reader = new FileReader();
+          reader.onload = function (e) {
+            var img = document.getElementById("zoom");
+            img.src = e.target.result;
+          };
+          reader.readAsDataURL(file);
+        } else {
+          alert("Please select an image file.");
+        }
+      }
+    </script>
+  </body>
+</html>
