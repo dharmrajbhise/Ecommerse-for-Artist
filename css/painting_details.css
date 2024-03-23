@@ -195,166 +195,90 @@ Navigation
     margin-top: 50px;
   }
 
-  /* cards  */
-
-  .top{
-    margin-top: 50px;
-    margin-bottom: 100px;
-  }
-
-  .card{
-    margin-top: 20px;
-    font-size: 20px;
-    border: 1px solid #ddd; 
-    border-radius: 8px; 
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  }
-
-  .card:hover{
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
-  }
-
-  .card-body{
-    font-size: 25px;
-  }
-
-  .card-title{
-    font-size: 30px;
-  }
-
-  .card-body a{
-    font-size: 20px;
-    padding: 10px;
-    background-color: #f0961c;
-  }
-
-  .card-body img{
-    /* border: 15px solid #7b7b7a;
-  border-radius: 10px; */
-  padding: 20px;
-  }
-
-  .card-body img:hover{
-    transform: scale(1.1);
-    /* transition: 0.5s; */
-  }
-
-  .img-size{
-    /* padding: 30px; */
-    /* max-width: 400px; */
-    /* max-height: 500px; */
-    /* object-fit: cover; */
-    
-  }
-
-  /* CSS for product image and container */
-  .product-container {
-    /* width: 300px; 
-    height: auto; 
-    overflow: hidden;
-    position: relative; */
-}
-
-.product-image {
-  width: auto;
-  height: auto;
-  /* transition: transform 0.3s ease; Smooth transition for zoom effect  */
-  /* transform-origin: right center; */
-}
-
-/* .product-container:hover .product-image {
-  transform: scale(1.8); 
-} */
-
-  .info{
-    padding: 30px;
-  }
-
-  /* pagination */
-
-  .pagination-container {
-    padding: 20px;
-   /* margin-top: 20px;  Adjust the margin-top value as needed */
-}
 
 
- /* Contact */
+  
+
+
+
+  /* Contact */
 .contact {
-  background-color: var(--black);
-  color: var(--white);
-  padding: 10rem 20rem;
-}
-
-.contact .row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-}
-
-.contact .row .col h2 {
-  margin-bottom: 1.5rem;
-}
-
-.contact .row .col p {
-  width: 70%;
-  margin-bottom: 2rem;
-}
-
-.btn-1 {
-  background-color:  #f0961c;
-  color: var(--white);
-  display: inline-block;
-  border-radius: 1rem;
-  padding: 1rem 2rem;
-}
-
-
-
-
-/* Footer */
-.footer {
-    padding: 7rem 1rem;
-    background-color:  #f0961c;
+    background-color: var(--black);
+    color: var(--white);
+    padding: 10rem 20rem;
   }
   
-  footer .row {
+  .contact .row {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    max-width: 99.6rem;
-    margin: 0 auto;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
   }
   
-  .footer .col {
-    flex-direction: column;
+  .contact .row .col h2 {
+    margin-bottom: 1.5rem;
+  }
+  
+  .contact .row .col p {
+    width: 70%;
+    margin-bottom: 2rem;
+  }
+  
+  .btn-1 {
+    background-color:  #f0961c;
     color: var(--white);
-    align-items: flex-start;
+    display: inline-block;
+    border-radius: 1rem;
+    padding: 1rem 2rem;
   }
   
-  .footer .col:last-child {
-    flex-direction: row;
-    justify-content: center;
-  }
   
-  .footer .col:last-child span {
-    font-size: 2.5rem;
-    margin-right: 0.5rem;
-    color: var(--white);
-  }
   
-  .footer .col a {
-    color: var(--white);
-    font-size: 1.5rem;
-    padding: 0.5rem;
-    font-weight: 300;
-  }
   
-  .footer .col h4 {
-    margin-bottom: 1rem;
-  }
-  
-  @media only screen and (max-width: 567px) {
-    footer .row {
-      grid-template-columns: 1fr;
-      row-gap: 3rem;
+  /* Footer */
+  .footer {
+      padding: 7rem 1rem;
+      background-color:  #f0961c;
     }
-  }
+    
+    footer .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      max-width: 99.6rem;
+      margin: 0 auto;
+    }
+    
+    .footer .col {
+      flex-direction: column;
+      color: var(--white);
+      align-items: flex-start;
+    }
+    
+    .footer .col:last-child {
+      flex-direction: row;
+      justify-content: center;
+    }
+    
+    .footer .col:last-child span {
+      font-size: 2.5rem;
+      margin-right: 0.5rem;
+      color: var(--white);
+    }
+    
+    .footer .col a {
+      color: var(--white);
+      font-size: 1.5rem;
+      padding: 0.5rem;
+      font-weight: 300;
+    }
+    
+    .footer .col h4 {
+      margin-bottom: 1rem;
+    }
+    
+    @media only screen and (max-width: 567px) {
+      footer .row {
+        grid-template-columns: 1fr;
+        row-gap: 3rem;
+      }
+    }
+  

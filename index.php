@@ -136,10 +136,10 @@
                   Paintings  &nbsp;
               </a>
               <div class="dropdown-menu" aria-labelledby="paintingsDropdown">
-                  <a class="dropdown-item" href="/smart/paintings/painting_category.php?image_category=realistic painting" style="font-size: 15px;">Realistic Painting</a>
-                  <a class="dropdown-item" href="/smart/paintings/painting_category.php?image_category=composition painting" style="font-size: 15px;">Composition Painting</a>
-                  <a class="dropdown-item" href="/smart/paintings/painting_category.php?image_category=abstract painting" style="font-size: 15px;">Abstract Painting</a>
-                  <a class="dropdown-item" href="/smart/paintings/painting_category.php?image_category=nature/wildlife painting" style="font-size: 15px;">Nature / Wildlife</a>
+                  <a class="dropdown-item" href="/smart/paintings/painting_category.php?image_category=Realistic Painting" style="font-size: 15px;">Realistic Painting</a>
+                  <a class="dropdown-item" href="/smart/paintings/painting_category.php?image_category=Composition Painting" style="font-size: 15px;">Composition Painting</a>
+                  <a class="dropdown-item" href="/smart/paintings/painting_category.php?image_category=Abstract Painting" style="font-size: 15px;">Abstract Painting</a>
+                  <a class="dropdown-item" href="/smart/paintings/painting_category.php?image_category=Nature/wildlife Painting" style="font-size: 15px;">Nature / Wildlife</a>
               </div>
           </li>
           <li class="nav-item active ">
@@ -257,28 +257,28 @@
 
 
     <!-- Categories Section -->
-    <section class="section category">
+    <!-- <section class="section category">
       <div class="cat-center">
         <div class="cat">
           <img src="./images/Devotte.jpg" alt="" />
-          <div>
+          <div> -->
              <!--  <p>WOMEN'S WEAR</p>   -->
-          </div>
+          <!-- </div>
         </div>
         <div class="cat">
           <img src="./images/vitthal.jpg" alt="" />
-          <div>
+          <div> -->
           <!--  <p>ACCESSORIES</p>   -->
-          </div>
+          <!-- </div>
         </div>
         <div class="cat">
           <img src="./images/shankar_maharaj.jpg" alt="" />
-        <div>
+        <div> -->
           <!--   <p>MEN'S WEAR</p>  -->
-          </div>   
+          <!-- </div>   
         </div>
       </div>
-    </section>
+    </section> -->
 
     <!-- New Arrivals -->
     <section class="section new-arrival">
@@ -288,67 +288,59 @@
       </div>
 
       <div class="product-center">
-        <div class="product-item">
-          <div class="overlay">
-            <a href="productDetails.html" class="product-thumb">
-              <img src="./images/Abstract-1.jpg" alt="" />
-            </a>
-          </div>
-          <div class="product-info">
-            <span>Abstract 1</span>
-           <!-- <a href="productDetails.html">Quis Nostrud Exercitation</a>  -->
+        <?php
+        
+        include('config.php');
 
-           <a href="../productDetails.html" style="text-decoration: none; color: orange;">Medium - Acylic On Canvas</a>
-           <button onclick="window.location.href='#productDetails.html'" style="padding: 5px 10px; background-color:  #f0961c; color: white; border: none; cursor: pointer;">Buy Now</button>
-            <h4>Rs 15,000/-</h4>
-          </div>
+        $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
-           <!--
-          <ul class="icons">
-           
-            <li><i class="bx bx-heart"></i></li>
-            <li><i class="bx bx-search"></i></li>
-            <li><i class="bx bx-cart"></i></li>
-          </ul>
-        -->
-        </div>
-        <div class="product-item">
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
 
+        $sqlImages = "SELECT * FROM paintings WHERE image_category = 'Abstract Painting' LIMIT 8";
+        $resultImages = $conn->query($sqlImages);
 
+        while ($imageRow = $resultImages->fetch_assoc()) {
+          $imageData = $imageRow['image_data'];
+          $imageType = 'image/jpg'; 
+  
+          $base64Image = 'data:' . $imageType . ';base64,' . base64_encode($imageData);
+          // Generate HTML code for each product item
+          echo '<div class="product-item">';
+          echo '<div class="overlay">';
+          echo '<a href="/smart/product-details.php?id=' . $imageRow['id'] . '" class="product-thumb">';
+          echo '<img src="' . $base64Image . '" alt="' . $imageRow['image_title'] . '" />';
+          echo '</a>';
+          echo '</div>';
+          echo '<div id="product-info-container" class="product-info">';
+          echo '<h2>' . $imageRow['image_title'] . '</h2>';
+          echo '<h2>Medium - ' . $imageRow['image_medium'] . '</h2>';
+          echo '<h2>Size - ' . $imageRow['image_size'] . '</h2>';
+          echo '<h2>Rs ' . $imageRow['image_prize'] . '/-</h2>';
+          echo '<button onclick="window.location.href=\'/smart/product-details.php?id=' . $imageRow['id'] . '\'" style="padding: 5px 10px; background-color: #f0961c; color: white; border: none; cursor: pointer;">Buy Now</button>';
+          echo '</div>';
+          echo '</div>';
+        }
 
-
-
-
-
-
-
+        $conn->close(); 
+        ?>
+      </div>
+        <!-- <div class="product-item">
           <div class="overlay">
             <a href="" class="product-thumb">
               <img src="./images/Abstract-2.jpg" alt="" id="" />
             </a>
             <span class="discount">50%</span>
           </div>
-
-       
-
-
-
-          
           <div class="product-info">
             <span>Abstract 2</span>
-            <!--  <a href="">Sonata White Men’s Shirt</a> -->
+            
             <a href="#productDetails.html" style="text-decoration: none; color: orange;">Medium - Acylic On Canvas</a>
            <button onclick="window.location.href='#productDetails.html'" style="padding: 5px 10px; background-color:  #f0961c; color: white; border: none; cursor: pointer;">Buy Now</button>
             <h4>Rs 15,000/-</h4>
           </div>
 
-          <!--
-          <ul class="icons">
-            <li><i class="bx bx-heart"></i></li>
-            <li><i class="bx bx-search"></i></li>
-            <li><i class="bx bx-cart"></i></li>
-          </ul>
-          -->
         </div>
         <div class="product-item">
           <div class="overlay">
@@ -358,7 +350,7 @@
           </div>
           <div class="product-info">
             <span>Abstract 3</span>
-           <!--  <a href="">Concepts Solid Pink Men’s Polo</a>  -->
+           
 
            <a href="#productDetails.html" style="text-decoration: none; color: orange;">Medium - Acylic On Canvas</a>
            <button onclick="window.location.href='#productDetails.html'" style="padding: 5px 10px; background-color:  #f0961c; color: white; border: none; cursor: pointer;">Buy Now</button>
@@ -366,16 +358,6 @@
             <h4>Rs 15,000/-</h4>
           </div>
 
-          <!--
-          <ul class="icons">
-
-            
-            <li><i class="bx bx-heart"></i></li>
-            <li><i class="bx bx-search"></i></li>
-            <li><i class="bx bx-cart"></i></li>
-          </ul>
-
-          -->
         </div>
         <div class="product-item">
           <div class="overlay">
@@ -388,7 +370,6 @@
           <div class="product-info">
             <span>Abstract 4</span>
             
-           <!-- <a href="">Edor do eiusmod tempor</a> -->
 
 
            <a href="#productDetails.html" style="text-decoration: none; color: orange;">Medium - Acylic On Canvas</a>
@@ -396,16 +377,6 @@
             <h4>Rs 15,000/-</h4>
           </div>
 
-           <!--
-          <ul class="icons">
-
-           
-            <li><i class="bx bx-heart"></i></li>
-            <li><i class="bx bx-search"></i></li>
-            <li><i class="bx bx-cart"></i></li>
-          </ul>
-
-              -->
         </div>
         
         <div class="product-item">
@@ -416,20 +387,13 @@
           </div>
           <div class="product-info">
             <span>Abstract 5</span>
-           <!-- <a href="">Edor do eiusmod tempor</a>  -->
            <a href="#productDetails.html" style="text-decoration: none; color: orange;">Medium - Acylic On Canvas</a>
            <button onclick="window.location.href='#productDetails.html'" style="padding: 5px 10px; background-color:  #f0961c; color: white; border: none; cursor: pointer;">Buy Now</button>
             <h4>Rs 15,000/-</h4>
           </div>
           <ul class="icons">
 
-            <!--
-            <li><i class="bx bx-heart"></i></li>
-            <li><i class="bx bx-search"></i></li>
-            <li><i class="bx bx-cart"></i></li>
-          </ul>
-
-          -->
+           
         </div>
         <div class="product-item">
           <div class="overlay">
@@ -441,19 +405,12 @@
           
           <div class="product-info">
             <span>Abstract 6</span>
-           <!--  <a href="">Edor do eiusmod tempor</a>   -->
+         
            <a href="#productDetails.html" style="text-decoration: none; color: orange;">Medium - Acylic On Canvas</a>
            <button onclick="window.location.href='#productDetails.html'" style="padding: 5px 10px; background-color:  #f0961c; color: white; border: none; cursor: pointer;">Buy Now</button>
             <h4>Rs 15,000/-</h4>
           </div>
-          <!--
-          <ul class="icons">
-            <li><i class="bx bx-heart"></i></li>
-            <li><i class="bx bx-search"></i></li>
-            <li><i class="bx bx-cart"></i></li>
-          </ul>
-
-        -->
+          
         </div>
         <div class="product-item">
           <div class="overlay">
@@ -464,19 +421,11 @@
           </div>
           <div class="product-info">
             <span>Abstract 7</span>
-           <!-- <a href="">Edor do eiusmod tempor</a>  -->
+           
            <a href="#productDetails.html" style="text-decoration: none; color: orange;">Medium - Acylic On Canvas</a>
            <button onclick="window.location.href='#productDetails.html'" style="padding: 5px 10px; background-color:  #f0961c; color: white; border: none; cursor: pointer;">Buy Now</button>
             <h4>Rs 15,000/-</h4>
           </div>
-          <!--
-          <ul class="icons">
-            <li><i class="bx bx-heart"></i></li>
-            <li><i class="bx bx-search"></i></li>
-            <li><i class="bx bx-cart"></i></li>
-          </ul>
-
-          -->
         </div>
         <div class="product-item">
           <div class="overlay">
@@ -486,22 +435,13 @@
           </div>
           <div class="product-info">
             <span>Abstract 8</span>
-
-               
-           <!-- <a href="">Edor do eiusmod tempor</a>  -->
            <a href="#productDetails.html" style="text-decoration: none; color: orange;">Medium - Acylic On Canvas</a>
            <button onclick="window.location.href='#productDetails.html'" style="padding: 5px 10px; background-color:  #f0961c; color: white; border: none; cursor: pointer;">Buy Now</button>
             <h4>Rs 15,000/-</h4>
           </div>
-          <!--
-          <ul class="icons">
-            <li><i class="bx bx-heart"></i></li>
-            <li><i class="bx bx-search"></i></li>
-            <li><i class="bx bx-cart"></i></li>
-          </ul>
-        -->
-        </div>
-      </div>
+          
+        </div> 
+      </div>-->
     </section>
 
 
@@ -534,7 +474,46 @@
       </div>
 
       <div class="product-center">
-        <div class="product-item">
+      <?php
+        
+        // include('config.php');
+
+        $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sqlImages = "SELECT * FROM paintings WHERE image_category = 'Realistic Painting' LIMIT 8";
+        $resultImages = $conn->query($sqlImages);
+
+        while ($imageRow = $resultImages->fetch_assoc()) {
+          $imageData = $imageRow['image_data'];
+          $imageType = 'image/jpg'; 
+  
+          $base64Image = 'data:' . $imageType . ';base64,' . base64_encode($imageData);
+          // Generate HTML code for each product item
+          echo '<div class="product-item">';
+          echo '<div class="overlay">';
+          echo '<a href="/smart/product-details.php?id=' . $imageRow['id'] . '" class="product-thumb">';
+          echo '<img src="' . $base64Image . '" alt="' . $imageRow['image_title'] . '" />';
+          echo '</a>';
+          echo '</div>';
+          echo '<div id="product-info-container" class="product-info">';
+          echo '<h2>' . $imageRow['image_title'] . '</h2>';
+          echo '<h2>Medium - ' . $imageRow['image_medium'] . '</h2>';
+          echo '<h2>Size - ' . $imageRow['image_size'] . '</h2>';
+          echo '<h2>Rs ' . $imageRow['image_prize'] . '/-</h2>';
+          echo '<button onclick="window.location.href=\'/smart/product-details.php?id=' . $imageRow['id'] . '\'" style="padding: 5px 10px; background-color: #f0961c; color: white; border: none; cursor: pointer;">Buy Now</button>';
+          echo '</div>';
+          echo '</div>';
+      }
+
+        $conn->close(); 
+        ?>
+
+
+        <!-- <div class="product-item">
           <div class="overlay">
             <a href="" class="product-thumb">
               <img src="./images/new-1.jpg" alt="" />
@@ -547,13 +526,7 @@
             <button onclick="window.location.href='#productDetails.html'" style="padding: 5px 10px; background-color:  #f0961c; color: white; border: none; cursor: pointer;">Buy Now</button>
             <h4>Rs 15,000</h4>
           </div>
-          <!--
-          <ul class="icons">
-            <li><i class="bx bx-heart"></i></li>
-            <li><i class="bx bx-search"></i></li>
-            <li><i class="bx bx-cart"></i></li>
-          </ul>
-          -->
+          
         </div>
         <div class="product-item">
           <div class="overlay">
@@ -568,14 +541,7 @@
             <button onclick="window.location.href='#productDetails.html'" style="padding: 5px 10px; background-color:  #f0961c; color: white; border: none; cursor: pointer;">Buy Now</button>
             <h4>Rs 15,000</h4>
           </div>
-          <!--
-          <ul class="icons">
-            <li><i class="bx bx-heart"></i></li>
-            <li><i class="bx bx-search"></i></li>
-            <li><i class="bx bx-cart"></i></li>
-          </ul>
-
-        -->
+          
         </div>
         <div class="product-item">
           <div class="overlay">
@@ -590,13 +556,7 @@
             <button onclick="window.location.href='#productDetails.html'" style="padding: 5px 10px; background-color:  #f0961c; color: white; border: none; cursor: pointer;">Buy Now</button>
             <h4>Rs 15,000</h4>
           </div>
-          <!--
-          <ul class="icons">
-            <li><i class="bx bx-heart"></i></li>
-            <li><i class="bx bx-search"></i></li>
-            <li><i class="bx bx-cart"></i></li>
-          </ul>
-          -->
+          
         </div>
         <div class="product-item">
           <div class="overlay">
@@ -610,12 +570,7 @@
             <button onclick="window.location.href='#productDetails.html'" style="padding: 5px 10px; background-color:  #f0961c; color: white; border: none; cursor: pointer;">Buy Now</button>
             <h4>Rs 15,000</h4>
           </div>
-          <!--
-          <ul class="icons">
-            <li><i class="bx bx-heart"></i></li>
-            <li><i class="bx bx-search"></i></li>
-            <li><i class="bx bx-cart"></i></li>
-          </ul> -->
+          
         </div>
 
         <div class="product-item">
@@ -626,7 +581,7 @@
           </div>
           <div class="product-info">
             <span>Krishna</span>
-           <!-- <a href="productDetails.html">Quis Nostrud Exercitation</a>  -->
+           
   
            <a href="../productDetails.html" style="text-decoration: none; color: orange;">Medium - Acylic On Canvas</a>
            <button onclick="window.location.href='#productDetails.html'" style="padding: 5px 10px; background-color:  #f0961c; color: white; border: none; cursor: pointer;">Buy Now</button>
@@ -642,7 +597,7 @@
             </div>
             <div class="product-info">
               <span>Mohini Attam</span>
-             <!-- <a href="productDetails.html">Quis Nostrud Exercitation</a>  -->
+             
   
              <a href="../productDetails.html" style="text-decoration: none; color: orange;">Medium - Acylic On Canvas</a>
              <button onclick="window.location.href='#productDetails.html'" style="padding: 5px 10px; background-color:  #f0961c; color: white; border: none; cursor: pointer;">Buy Now</button>
@@ -658,7 +613,7 @@
             </div>
             <div class="product-info">
               <span>Musician</span>
-             <!-- <a href="productDetails.html">Quis Nostrud Exercitation</a>  -->
+             
   
              <a href="../productDetails.html" style="text-decoration: none; color: orange;">Medium - Acylic On Canvas</a>
              <button onclick="window.location.href='#productDetails.html'" style="padding: 5px 10px; background-color:  #f0961c; color: white; border: none; cursor: pointer;">Buy Now</button>
@@ -674,13 +629,13 @@
             </div>
             <div class="product-info">
               <span>Krishna 2</span>
-             <!-- <a href="productDetails.html">Quis Nostrud Exercitation</a>  -->
+             
   
              <a href="../productDetails.html" style="text-decoration: none; color: orange;">Medium - Acylic On Canvas</a>
              <button onclick="window.location.href='#productDetails.html'" style="padding: 5px 10px; background-color:  #f0961c; color: white; border: none; cursor: pointer;">Buy Now</button>
               <h4>Rs 60,000/-</h4>
             </div>
-          </div>
+          </div> -->
       </div>
     
     </section>

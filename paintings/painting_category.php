@@ -180,8 +180,8 @@ if ($result->num_rows > 0) {
         echo '<div class="card">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-6">
-                        <img src="' . $base64Image . '" class="img-fluid rounded-start img-size" alt="Image">
+                    <div class="col-md-6 product-container">
+                        <img src="' . $base64Image . '" class="img-fluid rounded-start img-size product-image" alt="Image">
                     </div>
                     <div class="col-md-6 info">
                         <h5 class="card-title">' . $row['image_title'] . '</h5>
@@ -189,7 +189,7 @@ if ($result->num_rows > 0) {
                         <p class="card-text">Size: ' . $row['image_size'] . '</p> 
                         <p class="card-text">Availability: ' . $row['image_status'] . '</p>
                         <p class="card-text">Price: ' . $row['image_prize'] . '</p> 
-                        <a href="add_to_cart.php?image_id=' . $row['id'] . '" class="btn btn-primary">Add to cart</a>
+                        <a href="/smart/paintings/painting_details.php?id=' . $row['id'] . '" class="btn btn-primary">Buy Now</a>
                     </div>
                 </div>
             </div>
@@ -274,6 +274,26 @@ echo '</ul>
 
 
 
+
+
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.product-container').mousemove(function(event) {
+                const container = $(this);
+                const image = container.find('.product-image');
+
+                const containerOffset = container.offset();
+                const mouseX = event.pageX - containerOffset.left;
+                const mouseY = event.pageY - containerOffset.top;
+
+                const percentX = (mouseX / container.width()) * 100;
+                const percentY = (mouseY / container.height()) * 100;
+
+                image.css('transform-origin', percentX + '% ' + percentY + '%');
+            });
+        });
+    </script> -->
      <!-- Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
